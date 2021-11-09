@@ -1,14 +1,44 @@
-$(function () {
-    var dropZoneId = "drop-zone";
-    var buttonId = "clickHere";
-    var mouseOverClass = "mouse-over";
+var dropZoneId = "drop-zone";
+var buttonId = "clickHere";
+var uploadButton = "upload";
+var mouseOverClass = "mouse-over";
+var dropZone = $("#" + dropZoneId);
+var ooleft = dropZone.offset().left;
+var ooright = dropZone.outerWidth() + ooleft;
+var ootop = dropZone.offset().top;
+var oobottom = dropZone.outerHeight() + ootop;
+var inputFile = dropZone.find("input");
+var finalFiles = new Array()
 
-    var dropZone = $("#" + dropZoneId);
-    var ooleft = dropZone.offset().left;
-    var ooright = dropZone.outerWidth() + ooleft;
-    var ootop = dropZone.offset().top;
-    var oobottom = dropZone.outerHeight() + ootop;
-    var inputFile = dropZone.find("input");
+function updateFileNameDisplayArea(){
+    $('#filename').html('')
+    var fileNum = finalFiles.length;
+    var initial = 0;
+    console.log(fileNum)
+    for (initial; initial < fileNum; initial++) {
+        console.log(finalFiles[initial]);
+        $('#filename').append(
+            '<span class="fa-stack fa-lg">\
+                <i class="fa fa-file fa-stack-1x "></i>\
+                <strong class="fa-stack-1x" style="color:#FFF; font-size:12px; margin-top:2px;">'
+                + (initial+1) +
+                '</strong>\
+            </span> ' 
+            + finalFiles[initial].name + 
+            '&nbsp;&nbsp;<span class="fa fa-times-circle fa-lg closeBtn" title="remove" onClick="deleteRow('+ initial + ')">\
+            </span><br>'
+        );
+    }
+}
+
+function deleteRow(index){
+    console.log(index)
+    finalFiles.splice(index, 1);
+    updateFileNameDisplayArea()
+}
+
+$(function () {
+
     document.getElementById(dropZoneId).addEventListener("dragover", function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -60,14 +90,18 @@ $(function () {
     }, true);
 
     inputFile.on('change', function (e) {
-        $('#filename').html("");
-        var fileNum = this.files.length,
-            initial = 0,
-            counter = 0;
+        var fileNum = this.files.length;
+        var initial = 0;
+        console.log(fileNum);
         for (initial; initial < fileNum; initial++) {
-            counter = counter + 1;
-            $('#filename').append('<span class="fa-stack fa-lg"><i class="fa fa-file fa-stack-1x "></i><strong class="fa-stack-1x" style="color:#FFF; font-size:12px; margin-top:2px;">'+ counter + '</strong></span> ' + this.files[initial].name + '&nbsp;&nbsp;<span class="fa fa-times-circle fa-lg closeBtn" title="remove"></span><br>');
+            finalFiles.push(this.files[initial])
         }
+        console.log(finalFiles)
+        updateFileNameDisplayArea()
     });
+
+    document.getElementById(uploadButton).addEventListener("click", function(e) {
+        
+    })
 	
 })
