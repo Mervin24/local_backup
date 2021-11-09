@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop or Browse: File Upload | CodingNepal</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+  <div id="drop-zone">
+    <p>Drop files here...</p>
+    <div id="clickHere">or click here.. <i class="fa fa-upload"></i>
+        <input type="file" name="file" id="file" multiple />
+    </div>
+    <div id='filename'></div>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
