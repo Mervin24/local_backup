@@ -3,6 +3,10 @@ import datetime
 from backup.models import File
 from backup.dal import fileaccesslayer
 
+from django.conf import settings
+
+
+
 def saveFiles(files, username):
 	fss = FileSystemStorage()
 	for file in files:
@@ -18,7 +22,8 @@ def saveFiles(files, username):
 		fileaccesslayer.insertFile(fileData)
 
 def getFileExtension(fname):
-	return fname.split('.')[1]
+	parts = fname.split('.')
+	return parts[1] if len(parts) > 1 else parts[0]
 
 def getFilesForUserName(username):
 	return fileaccesslayer.getFilesForUsername(username)

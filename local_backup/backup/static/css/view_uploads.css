@@ -1,0 +1,28 @@
+.container{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 40px;
+	flex-wrap: wrap;
+}
+
+.element{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
+	cursor:pointer;
+	border: 0.1px solid #e6e6e6; 
+	border-radius: 10px;
+	padding: 10px 10px 0px 10px;
+}
+
+.file-name{
+	color: #717171;
+	font-size: 20px
+}
+
+.download-a{
+	text-decoration: none;
+}

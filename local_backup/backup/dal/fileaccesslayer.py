@@ -8,3 +8,6 @@ def getFilesForUsername(username):
 	
 def getFile(id):
 	return File.objects.get(pk=id)
+
+def clear():
+	File.objects.all().delete()

@@ -5,13 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag & Drop or Browse: File Upload | CodingNepal</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/view_uploads.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 </head>
 <body>
-{% for file in files %}
-  <img src="{% static 'image/file.png' %}" />
-  <p>{{file.name}}</p>
-{% endfor %}
+  <div class="container" id="container">
+    {% for file in files %}
+      <div class="element" onclick="download()">
+        <img class="display-pic" src="{% static 'image/file.png' %}" />
+        <p class="file-name">{{file.name}}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    var csrftoken = '{{ csrf_token }}';
+  </script>
+  <script src="{% static 'js/view_uploads_script.js' %}"></script>
+
 </body>
 </html>

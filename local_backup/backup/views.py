@@ -25,3 +25,11 @@ def viewUploads(request):
 	username = request.session[USER_NAME_KEY]
 	files = fileStorageManager.getFilesForUserName(username)
 	return render(request, "view_uploads.html", {'files' : files})
+
+def download(request):
+    file_name = #get the filename of desired excel file
+    path_to_file = #get the path of desired excel file
+    response = HttpResponse(mimetype='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    response['X-Sendfile'] = smart_str(path_to_file)
+    return response

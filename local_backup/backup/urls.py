@@ -9,3 +9,5 @@ urlpatterns = [
 		path('file-upload', views.fileUpload, name='fileUpload'),
 		path('view-uploads', views.viewUploads, name='viewUploads')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
