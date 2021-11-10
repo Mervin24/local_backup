@@ -9,14 +9,16 @@ var ootop = dropZone.offset().top;
 var oobottom = dropZone.outerHeight() + ootop;
 var inputFile = dropZone.find("input");
 var finalFiles = new Array()
+const POST = "POST"
+const uploadedFiles = "uploadedFiles"
+const uploadedFilesUrl = "fileUpload"
+const csrfmiddlewaretoken = 'csrfmiddlewaretoken'
 
 function updateFileNameDisplayArea(){
     $('#filename').html('')
     var fileNum = finalFiles.length;
     var initial = 0;
-    console.log(fileNum)
     for (initial; initial < fileNum; initial++) {
-        console.log(finalFiles[initial]);
         $('#filename').append(
             '<span class="fa-stack fa-lg">\
                 <i class="fa fa-file fa-stack-1x "></i>\
@@ -32,9 +34,32 @@ function updateFileNameDisplayArea(){
 }
 
 function deleteRow(index){
-    console.log(index)
     finalFiles.splice(index, 1);
     updateFileNameDisplayArea()
+}
+
+function uploadFileList(fileList){
+    var formData = new FormData()
+    for(var i = 0; i < fileList.files.length; i++){
+        console.log(fileList.files[i])
+        formData.append(uploadedFiles, fileList.files[i])
+    }
+    formData.append(csrfmiddlewaretoken, csrftoken);
+    $.ajax({
+        type: POST,
+        url: uploadedFilesUrl,
+        data: formData,
+        success: function(data){
+            console.log("success")
+        },
+        error: function(data){
+            console.log("error")
+        },
+        async: true,
+
+        contentType: false,
+        processData: false,
+    })
 }
 
 $(function () {
@@ -92,15 +117,20 @@ $(function () {
     inputFile.on('change', function (e) {
         var fileNum = this.files.length;
         var initial = 0;
-        console.log(fileNum);
         for (initial; initial < fileNum; initial++) {
             finalFiles.push(this.files[initial])
         }
-        console.log(finalFiles)
         updateFileNameDisplayArea()
     });
 
     document.getElementById(uploadButton).addEventListener("click", function(e) {
+        var fileList = new DataTransfer()
+        var fileNum = finalFiles.length;
+        var initial = 0;
+        for (initial; initial < fileNum; initial++) {
+            fileList.items.add(finalFiles[initial])            
+        }
+        uploadFileList(fileList)
         
     })
 	
