@@ -11,18 +11,13 @@
 <body>
   <div class="container" id="container">
     {% for file in files %}
-      <div class="element" onclick="download()">
-        <img class="display-pic" src="{% static 'image/file.png' %}" />
-        <p class="file-name">{{file.name}}</p>
-      </div>
+      <a href="{% url 'downloadfile' file.id %}" class="download-a" download>
+        <div class="element">
+          <img class="display-pic" src="{% static 'image/file.png' %}" />
+          <p class="file-name">{{file.name}}</p>
+        </div>
+      </a>
     {% endfor %}
   </div>
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>
-    var csrftoken = '{{ csrf_token }}';
-  </script>
-  <script src="{% static 'js/view_uploads_script.js' %}"></script>
-
 </body>
 </html>

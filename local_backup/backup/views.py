@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import	HttpResponse
 from .managers import fileStorageManager
+from django.conf import settings
+import mimetypes
 
 GET = "GET"
 POST = "POST"
@@ -24,12 +26,16 @@ def fileUpload(request):
 def viewUploads(request):
 	username = request.session[USER_NAME_KEY]
 	files = fileStorageManager.getFilesForUserName(username)
+	print(files[0].url)
 	return render(request, "view_uploads.html", {'files' : files})
 
-def download(request):
-    file_name = #get the filename of desired excel file
-    path_to_file = #get the path of desired excel file
-    response = HttpResponse(mimetype='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
-    response['X-Sendfile'] = smart_str(path_to_file)
-    return response
+def download(request, id):
+	username = request.session[USER_NAME_KEY]
+	file = fileStorageManager.getFileForId(id)
+	path_to_file = '/'.join(settings.MEDIA_ROOT.split('\\')[0:-1])+file.url
+	filename = path_to_file.split('/')[-1]
+	path = open(path_to_file, 'rb')
+	mime_type, _ = mimetypes.guess_type(path_to_file)
+	response =  HttpResponse(path, content_type=mime_type)
+	response['Content-Disposition'] = "attachment; filename=%s" % filename
+	return response

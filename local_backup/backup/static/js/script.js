@@ -51,10 +51,10 @@ function uploadFileList(fileList){
         url: uploadedFilesUrl,
         data: formData,
         success: function(data){
-            console.log("success")
+            console.log(data)
         },
         error: function(data){
-            console.log("error")
+            console.log(data)
         },
         async: true,
 

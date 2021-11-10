@@ -22,8 +22,10 @@ def saveFiles(files, username):
 		fileaccesslayer.insertFile(fileData)
 
 def getFileExtension(fname):
-	parts = fname.split('.')
-	return parts[1] if len(parts) > 1 else parts[0]
+	return fname.split('.')[-1]
 
 def getFilesForUserName(username):
 	return fileaccesslayer.getFilesForUsername(username)
+
+def getFileForId(id):
+	return fileaccesslayer.getFile(id)
