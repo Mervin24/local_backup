@@ -3,7 +3,7 @@ from backup.models import File
 def insertFile(file):
 	file.save()
 
-def getFileForUsername(username):
+def getFilesForUsername(username):
 	return File.objects.filter(uploaded_by=username)
 	
 def getFile(id):

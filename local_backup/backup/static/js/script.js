@@ -1,6 +1,7 @@
 var dropZoneId = "drop-zone";
 var buttonId = "clickHere";
 var uploadButton = "upload";
+var viewUploadsButton = "view-uploads"
 var mouseOverClass = "mouse-over";
 var dropZone = $("#" + dropZoneId);
 var ooleft = dropZone.offset().left;
@@ -11,7 +12,7 @@ var inputFile = dropZone.find("input");
 var finalFiles = new Array()
 const POST = "POST"
 const uploadedFiles = "uploadedFiles"
-const uploadedFilesUrl = "fileUpload"
+const uploadedFilesUrl = "file-upload"
 const csrfmiddlewaretoken = 'csrfmiddlewaretoken'
 
 function updateFileNameDisplayArea(){
