@@ -125,7 +125,7 @@ llvmlite==0.20.0
 locket==0.2.0
 lockfile==0.12.2
 lxml==4.1.0
-macholib @ file:///tmp/build/80754af9/macholib_1597435072973/work
+macholib==1.4
 Markdown==2.6.11
 MarkupSafe==1.0
 marshmallow==2.15.0
@@ -183,7 +183,7 @@ pycodestyle==2.3.1
 pycosat==0.6.3
 pycparser==2.18
 pycrypto==2.6.1
-pycryptodome @ file:///C:/ci/pycryptodome_1599214611862/work
+pycryptodome==3.4.3
 pycurl==7.43.0
 pyflakes==1.6.0
 Pygments==2.2.0
