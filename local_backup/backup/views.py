@@ -32,7 +32,7 @@ def viewUploads(request):
 def download(request, id):
 	username = request.session[USER_NAME_KEY]
 	file = fileStorageManager.getFileForId(id)
-	path_to_file = settings.MEDIA_ROOT+"/.."+file.url
+	path_to_file = settings.MEDIA_ROOT+".."+file.url
 	filename = path_to_file.split('/')[-1]
 	path = open(path_to_file, 'rb')
 	mime_type, _ = mimetypes.guess_type(path_to_file)
