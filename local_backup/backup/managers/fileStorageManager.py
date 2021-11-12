@@ -2,9 +2,8 @@ from django.core.files.storage import FileSystemStorage
 import datetime
 from backup.models import File
 from backup.dal import fileaccesslayer
-
 from django.conf import settings
-
+import re
 
 
 def saveFiles(files, username):
@@ -29,3 +28,10 @@ def getFilesForUserName(username):
 
 def getFileForId(id):
 	return fileaccesslayer.getFile(id)
+
+def getDownloadFileFor(id):
+	file = getFileForId(id)
+	path_to_file = settings.MEDIA_ROOT+".."+file.url
+	filename = path_to_file.split('/')[-1]
+	path_to_file = re.escape(path_to_file)
+	return open(path_to_file, 'rb'), filename
