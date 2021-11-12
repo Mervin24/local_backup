@@ -33,5 +33,4 @@ def getDownloadFileForId(id):
 	file = getFileForId(id)
 	path_to_file = settings.MEDIA_ROOT+".."+file.url
 	filename = path_to_file.split('/')[-1]
-	path_to_file = re.escape(path_to_file)
 	return open(path_to_file, 'rb'), filename
