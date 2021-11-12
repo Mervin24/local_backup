@@ -32,6 +32,7 @@ def getDownloadFileForId(id):
 	file = getFileForId(id)
 	path_to_file = settings.MEDIA_ROOT+".."+file.url
 	filename = path_to_file.split('/')[-1]
-	path_to_file = path_to_file.replace(' ', "\\")
+	path_to_file = path_to_file.replace(' ', "\\ ")
+	print(path_to_file)
 	mime_type, _ = mimetypes.guess_type(path_to_file)
 	return open(path_to_file, 'rb'), filename, mime_type
