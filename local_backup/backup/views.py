@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import	HttpResponse
 from .managers import fileStorageManager
 from django.conf import settings
-import mimetypes
 
 GET = "GET"
 POST = "POST"
@@ -31,8 +30,7 @@ def viewUploads(request):
 
 def download(request, id):
 	username = request.session[USER_NAME_KEY]
-	path, filename = fileStorageManager.getDownloadFileForId(id)
-	mime_type, _ = mimetypes.guess_type(path_to_file)
+	path, filename, mime_type = fileStorageManager.getDownloadFileForId(id)
 	response =  HttpResponse(path, content_type=mime_type)
 	response['Content-Disposition'] = "attachment; filename=%s" % filename
 	return response

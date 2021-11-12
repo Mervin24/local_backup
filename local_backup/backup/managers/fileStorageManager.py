@@ -3,8 +3,7 @@ import datetime
 from backup.models import File
 from backup.dal import fileaccesslayer
 from django.conf import settings
-import re
-
+import mimetypes
 
 def saveFiles(files, username):
 	fss = FileSystemStorage()
@@ -33,4 +32,5 @@ def getDownloadFileForId(id):
 	file = getFileForId(id)
 	path_to_file = settings.MEDIA_ROOT+".."+file.url
 	filename = path_to_file.split('/')[-1]
-	return open(path_to_file, 'rb'), filename
+	mime_type, _ = mimetypes.guess_type(path_to_file)
+	return open(path_to_file, 'rb'), filename, mime_type
