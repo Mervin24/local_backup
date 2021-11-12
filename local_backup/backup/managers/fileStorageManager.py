@@ -9,7 +9,6 @@ def saveFiles(files, username):
 	fss = FileSystemStorage()
 	for file in files:
 		url = username+"/"+file.name
-		print(url)
 		fileData = File()
 		fileData.url = url
 		fileData.name = file.name

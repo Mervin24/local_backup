@@ -33,4 +33,5 @@ def download(request, id):
 	print(filename)
 	response =  HttpResponse(path, content_type=mime_type)
 	response['Content-Disposition'] = "attachment; filename=%s" % filename
+	print(response)
 	return response

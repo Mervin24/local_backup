@@ -42,7 +42,6 @@ function deleteRow(index){
 function uploadFileList(fileList){
     var formData = new FormData()
     for(var i = 0; i < fileList.files.length; i++){
-        console.log(fileList.files[i])
         formData.append(uploadedFiles, fileList.files[i])
     }
     formData.append(csrfmiddlewaretoken, csrftoken);
