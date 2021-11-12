@@ -29,7 +29,7 @@ def getFilesForUserName(username):
 def getFileForId(id):
 	return fileaccesslayer.getFile(id)
 
-def getDownloadFileFor(id):
+def getDownloadFileForId(id):
 	file = getFileForId(id)
 	path_to_file = settings.MEDIA_ROOT+".."+file.url
 	filename = path_to_file.split('/')[-1]
