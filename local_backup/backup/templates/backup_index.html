@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag & Drop or Browse: File Upload | CodingNepal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 </head>
 <body>
   <div id="upload" class="actionbutton">Upload</div>
   <a id="view-uploads" class="actionbutton" href="view-uploads">View Uploads</a>
+  <div class="container not-visible progress" id="progress"></div>
   <div id="drop-zone">
     <p>Drop files here...</p>
     <div id="clickHere">or click here.. <i class="fa fa-upload"></i>

@@ -14,6 +14,7 @@ const POST = "POST"
 const uploadedFiles = "uploadedFiles"
 const uploadedFilesUrl = "file-upload"
 const csrfmiddlewaretoken = 'csrfmiddlewaretoken'
+const progress_bar = document.getElementById('progress');
 
 function updateFileNameDisplayArea(){
     $('#filename').html('')
@@ -45,16 +46,31 @@ function uploadFileList(fileList){
         formData.append(uploadedFiles, fileList.files[i])
     }
     formData.append(csrfmiddlewaretoken, csrftoken);
+    progress_bar.classList.remove("not-visible");
     $.ajax({
         type: POST,
         url: uploadedFilesUrl,
         data: formData,
         success: function(data){
             console.log(data)
+            progress_bar.classList.add('not-visible')
         },
         error: function(data){
             console.log(data)
         },
+        xhr:function(){
+                const xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener('progress', e=>{
+                    if(e.lengthComputable){
+                        const percentProgress = (e.loaded/e.total)*100;
+                        console.log(percentProgress);
+                        progress_bar.innerHTML = `<div class="progress-bar progress-bar-striped bg-success" 
+                role="progressbar" style="width: ${percentProgress}%" aria-valuenow="${percentProgress}" aria-valuemin="0" 
+                aria-valuemax="100"></div>`
+                    }
+                });
+                return xhr
+            },
         async: true,
 
         contentType: false,

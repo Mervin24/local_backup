@@ -22,6 +22,9 @@
     color: #7E7E7E;
     
 }
+.not-visible{
+        display: none;
+    }
 /*If you dont want the button*/
  #clickHere {
     display: inline-block;
