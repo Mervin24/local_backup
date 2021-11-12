@@ -30,6 +30,7 @@ def viewUploads(request):
 def download(request, id):
 	username = request.session[USER_NAME_KEY]
 	path, filename, mime_type = fileStorageManager.getDownloadFileForId(id)
+	print(filename)
 	response =  HttpResponse(path, content_type=mime_type)
 	response['Content-Disposition'] = "attachment; filename=%s" % filename
 	return response
