@@ -25,7 +25,6 @@ def fileUpload(request):
 def viewUploads(request):
 	username = request.session[USER_NAME_KEY]
 	files = fileStorageManager.getFilesForUserName(username)
-	print(files[0].url)
 	return render(request, "view_uploads.html", {'files' : files})
 
 def download(request, id):
